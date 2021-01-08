@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>1.1 What is time series data? | Forecasting in R</title>
+  <meta name="description" content="1.1 What is time series data? | Forecasting in R" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="1.1 What is time series data? | Forecasting in R" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="1.1 What is time series data? | Forecasting in R" />
+  
+  
+  
+
+<meta name="author" content="Hakeem Frank" />
+
+
+<meta name="date" content="2021-01-07" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="introduction.html"/>
+<link rel="next" href="loading-time-series-data-into-r.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#who-its-for"><i class="fa fa-check"></i>Who it’s for</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#how-its-organized"><i class="fa fa-check"></i>How it’s organized</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="what-is-time-series-data.html"><a href="what-is-time-series-data.html"><i class="fa fa-check"></i><b>1.1</b> What is time series data?</a></li>
+<li class="chapter" data-level="1.2" data-path="loading-time-series-data-into-r.html"><a href="loading-time-series-data-into-r.html"><i class="fa fa-check"></i><b>1.2</b> Loading time series data into R</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="loading-time-series-data-into-r.html"><a href="loading-time-series-data-into-r.html#setting-up-the-project"><i class="fa fa-check"></i><b>1.2.1</b> Setting up the project</a></li>
+<li class="chapter" data-level="1.2.2" data-path="loading-time-series-data-into-r.html"><a href="loading-time-series-data-into-r.html#loading-the-sample-data"><i class="fa fa-check"></i><b>1.2.2</b> Loading the sample data</a></li>
+<li class="chapter" data-level="1.2.3" data-path="loading-time-series-data-into-r.html"><a href="loading-time-series-data-into-r.html#visualizing-the-sample-data"><i class="fa fa-check"></i><b>1.2.3</b> Visualizing the sample data</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="a-simple-forecast.html"><a href="a-simple-forecast.html"><i class="fa fa-check"></i><b>1.3</b> A simple forecast</a></li>
+<li class="chapter" data-level="1.4" data-path="forecast-accuracy.html"><a href="forecast-accuracy.html"><i class="fa fa-check"></i><b>1.4</b> Forecast accuracy</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="forecast-accuracy.html"><a href="forecast-accuracy.html#evaluating-the-forecast-in-r"><i class="fa fa-check"></i><b>1.4.1</b> Evaluating the forecast in R</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Forecasting in R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="what-is-time-series-data" class="section level2">
+<h2><span class="header-section-number">1.1</span> What is time series data?</h2>
+<p>Time series data is <strong>data that is indexed by some time measurement</strong>. As an Excel
+sheet or a table, it looks like a table with a column for the time and a column
+for the values of something at that time. Here is an example of the Dow Jones Industrial
+Average (DJIA) <strong>closing prices</strong>:</p>
+<table>
+<caption><span id="tab:unnamed-chunk-2">Table 1.1: </span>Daily DJIA values from 2006-2016.</caption>
+<thead>
+<tr class="header">
+<th align="left">Day</th>
+<th align="right">Close</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">2006-04-20</td>
+<td align="right">11342.89</td>
+</tr>
+<tr class="even">
+<td align="left">2006-04-21</td>
+<td align="right">11347.45</td>
+</tr>
+<tr class="odd">
+<td align="left">2006-04-24</td>
+<td align="right">11336.32</td>
+</tr>
+<tr class="even">
+<td align="left">2006-04-25</td>
+<td align="right">11283.25</td>
+</tr>
+<tr class="odd">
+<td align="left">2006-04-26</td>
+<td align="right">11354.49</td>
+</tr>
+<tr class="even">
+<td align="left">2006-04-27</td>
+<td align="right">11382.51</td>
+</tr>
+</tbody>
+</table>
+<p>And here are the <strong>quarterly earnings per share</strong> for Johnson &amp; Johnson:</p>
+<table>
+<caption><span id="tab:unnamed-chunk-3">Table 1.2: </span>Johnson &amp; Johnson quarterly earnings per share</caption>
+<thead>
+<tr class="header">
+<th align="right">Quarter</th>
+<th align="right">Earnings</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1960.00</td>
+<td align="right">0.71</td>
+</tr>
+<tr class="even">
+<td align="right">1960.25</td>
+<td align="right">0.63</td>
+</tr>
+<tr class="odd">
+<td align="right">1960.50</td>
+<td align="right">0.85</td>
+</tr>
+<tr class="even">
+<td align="right">1960.75</td>
+<td align="right">0.44</td>
+</tr>
+<tr class="odd">
+<td align="right">1961.00</td>
+<td align="right">0.61</td>
+</tr>
+<tr class="even">
+<td align="right">1961.25</td>
+<td align="right">0.69</td>
+</tr>
+</tbody>
+</table>
+<div id="multivariate-time-series-data" class="section level4 unnumbered">
+<h4>Multivariate Time Series Data</h4>
+<p>The examples up to this point were examples of univariate time series data. <strong>Multivariate</strong> time series
+have a time column, and multiple measurements (additional columns) for a given time.
+Here is a multivariate time series of the seasonally adjusted, quarterly growth rate of
+U.S. unemployment, GNP, consumption,and government and private investments from 1948 to 1988.</p>
+<table>
+<caption><span id="tab:unnamed-chunk-4">Table 1.3: </span>Five economic growth factors (%) indexed by time.</caption>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">time</th>
+<th align="right">unemp</th>
+<th align="right">gnp</th>
+<th align="right">consum</th>
+<th align="right">govinv</th>
+<th align="right">prinv</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">2</td>
+<td align="right">1948.25</td>
+<td align="right">-8.00</td>
+<td align="right">0.92</td>
+<td align="right">0.22</td>
+<td align="right">0.50</td>
+<td align="right">0.57</td>
+</tr>
+<tr class="even">
+<td align="left">3</td>
+<td align="right">1948.50</td>
+<td align="right">2.74</td>
+<td align="right">0.82</td>
+<td align="right">0.79</td>
+<td align="right">-1.44</td>
+<td align="right">-2.63</td>
+</tr>
+<tr class="odd">
+<td align="left">4</td>
+<td align="right">1948.75</td>
+<td align="right">15.03</td>
+<td align="right">-1.17</td>
+<td align="right">0.06</td>
+<td align="right">1.61</td>
+<td align="right">-11.73</td>
+</tr>
+<tr class="even">
+<td align="left">5</td>
+<td align="right">1949.00</td>
+<td align="right">20.91</td>
+<td align="right">-0.59</td>
+<td align="right">1.18</td>
+<td align="right">7.78</td>
+<td align="right">-13.42</td>
+</tr>
+<tr class="odd">
+<td align="left">6</td>
+<td align="right">1949.25</td>
+<td align="right">23.44</td>
+<td align="right">0.76</td>
+<td align="right">-0.23</td>
+<td align="right">4.39</td>
+<td align="right">4.93</td>
+</tr>
+<tr class="even">
+<td align="left">7</td>
+<td align="right">1949.50</td>
+<td align="right">16.48</td>
+<td align="right">-0.99</td>
+<td align="right">0.79</td>
+<td align="right">4.81</td>
+<td align="right">-2.95</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="visualizing-multivariate-time-series-data" class="section level4 unnumbered">
+<h4>Visualizing Multivariate Time Series Data</h4>
+<p>Looking at each series in the context of the other helps identify visual patterns,
+such as the <strong>spike</strong> in the unemployment growth rate in 1975 that led to a dip in GNP,
+consumption and private investment:</p>
+<p><img src="_main_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="loading-time-series-data-into-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

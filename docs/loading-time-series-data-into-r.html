@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>1.2 Loading time series data into R | Forecasting in R</title>
+  <meta name="description" content="1.2 Loading time series data into R | Forecasting in R" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="1.2 Loading time series data into R | Forecasting in R" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="1.2 Loading time series data into R | Forecasting in R" />
+  
+  
+  
+
+<meta name="author" content="Hakeem Frank" />
+
+
+<meta name="date" content="2021-01-07" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="what-is-time-series-data.html"/>
+<link rel="next" href="a-simple-forecast.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#who-its-for"><i class="fa fa-check"></i>Who it’s for</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#how-its-organized"><i class="fa fa-check"></i>How it’s organized</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="what-is-time-series-data.html"><a href="what-is-time-series-data.html"><i class="fa fa-check"></i><b>1.1</b> What is time series data?</a></li>
+<li class="chapter" data-level="1.2" data-path="loading-time-series-data-into-r.html"><a href="loading-time-series-data-into-r.html"><i class="fa fa-check"></i><b>1.2</b> Loading time series data into R</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="loading-time-series-data-into-r.html"><a href="loading-time-series-data-into-r.html#setting-up-the-project"><i class="fa fa-check"></i><b>1.2.1</b> Setting up the project</a></li>
+<li class="chapter" data-level="1.2.2" data-path="loading-time-series-data-into-r.html"><a href="loading-time-series-data-into-r.html#loading-the-sample-data"><i class="fa fa-check"></i><b>1.2.2</b> Loading the sample data</a></li>
+<li class="chapter" data-level="1.2.3" data-path="loading-time-series-data-into-r.html"><a href="loading-time-series-data-into-r.html#visualizing-the-sample-data"><i class="fa fa-check"></i><b>1.2.3</b> Visualizing the sample data</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="a-simple-forecast.html"><a href="a-simple-forecast.html"><i class="fa fa-check"></i><b>1.3</b> A simple forecast</a></li>
+<li class="chapter" data-level="1.4" data-path="forecast-accuracy.html"><a href="forecast-accuracy.html"><i class="fa fa-check"></i><b>1.4</b> Forecast accuracy</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="forecast-accuracy.html"><a href="forecast-accuracy.html#evaluating-the-forecast-in-r"><i class="fa fa-check"></i><b>1.4.1</b> Evaluating the forecast in R</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Forecasting in R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="loading-time-series-data-into-r" class="section level2">
+<h2><span class="header-section-number">1.2</span> Loading time series data into R</h2>
+<p>If you’re new to R, you will first have to <a href="https://www.earthdatascience.org/courses/earth-analytics/document-your-science/setup-r-rstudio/">install R and R Studio</a>
+on your machine. You can even <a href="https://support.rstudio.com/hc/en-us/articles/115011846747-Using-RStudio-Themes">change the R Studio theme</a>
+once it’s installed if you’re feeling fancy.</p>
+<div id="setting-up-the-project" class="section level3">
+<h3><span class="header-section-number">1.2.1</span> Setting up the project</h3>
+<p>After everything is set up, open R Studio and <strong>open a new R script</strong> under
+<code>File &gt; New File &gt; R Script</code>. This will open a blank file. First, save it under<code>File &gt; Save</code>
+and save it in a new folder. Name the folder something useful, like <code>my_forecasting_project</code> or whatever
+will help keep things organized.</p>
+<p>This will be <strong>where you save any files related to your project</strong>. It’s good practice to
+keep different types of files <a href="https://miro.medium.com/max/1340/1*CD3nTl6GEvTfbTMGB1_dFQ.png">in different folders</a>, but we’ll use a simple, minimal folder structure that works for simple projects.</p>
+<p><img src="media/directory_example.png" /></p>
+<p>To make sure R Studio can easily find files in your current folder, go to
+<code>Session &gt; Set Working Directory &gt; To Source File Location</code>. This will <strong>set your working directory</strong>
+as the folder that you created for the forecast script and data.</p>
+<p>Finally, we need to install a few tools. In the <a href="https://i1.wp.com/ikashnitsky.github.io/images/180522/layout-annotated.png?w=578&amp;ssl=1">R Console</a>,
+type the following:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="loading-time-series-data-into-r.html#cb1-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;forecast&quot;</span>)</span>
+<span id="cb1-2"><a href="loading-time-series-data-into-r.html#cb1-2"></a><span class="kw">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>)</span>
+<span id="cb1-3"><a href="loading-time-series-data-into-r.html#cb1-3"></a><span class="kw">install.packages</span>(<span class="st">&quot;zoo&quot;</span>)</span>
+<span id="cb1-4"><a href="loading-time-series-data-into-r.html#cb1-4"></a><span class="kw">install.packages</span>(<span class="st">&quot;lubridate&quot;</span>)</span></code></pre></div>
+<p>These contain the forecasting and time series tools that will speed up processing
+data and generating forecasts.</p>
+</div>
+<div id="loading-the-sample-data" class="section level3">
+<h3><span class="header-section-number">1.2.2</span> Loading the sample data</h3>
+<p>In your own project, ensure that your time series data is in a folder called <code>data</code> in the top of the project directory, so that the file structure looks like:</p>
+<pre><code>my_forecasting_project
+│   my_forecasting_script.R
+│
+└───data
+│   │   my_data.csv
+│   │</code></pre>
+<p>We are now in R and have everything installed. Most scripting will happen in the
+<a href="https://i1.wp.com/ikashnitsky.github.io/images/180522/layout-annotated.png?w=578&amp;ssl=1">R source panel</a>.
+In the source panel, type the following:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="loading-time-series-data-into-r.html#cb3-1"></a><span class="kw">library</span>(forecast)</span>
+<span id="cb3-2"><a href="loading-time-series-data-into-r.html#cb3-2"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb3-3"><a href="loading-time-series-data-into-r.html#cb3-3"></a><span class="kw">library</span>(zoo)</span>
+<span id="cb3-4"><a href="loading-time-series-data-into-r.html#cb3-4"></a><span class="kw">library</span>(lubridate)</span></code></pre></div>
+<p>and click <code>Run</code> in the top right-hand corner. Another option is select everything
+in the script (<code>cmd+A</code> or <code>ctrl+A</code>) and then run it with <code>cmd + return</code> (or <code>ctrl + return</code>). If everything runs successfully, then you now have the functions loaded in your development environment to load the data.</p>
+<p>Add the following lines under the previous lines of code to load the data and store it in a variable, <code>my_data</code>:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="loading-time-series-data-into-r.html#cb4-1"></a><span class="co"># load a csv from the data/ folder and store it as a dataframe</span></span>
+<span id="cb4-2"><a href="loading-time-series-data-into-r.html#cb4-2"></a><span class="co"># the path relative to the current working directory</span></span>
+<span id="cb4-3"><a href="loading-time-series-data-into-r.html#cb4-3"></a>my_data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;data/visitors.csv&#39;</span>)</span></code></pre></div>
+<p>Now that the data is successfully loaded, we can look at the first few rows. After writing the next block, <strong>move the cursor to the end of the line</strong>, and hit <code>cmd+enter</code> to run that specific line.</p>
+<p>Going forward, use <code>cmd+enter</code> on the beginning of the line with the command that we want to execute to run each line of code.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="loading-time-series-data-into-r.html#cb5-1"></a><span class="co"># view the first few lines of a dataframe</span></span>
+<span id="cb5-2"><a href="loading-time-series-data-into-r.html#cb5-2"></a><span class="kw">head</span>(my_data)</span></code></pre></div>
+<pre><code>## # A tibble: 6 x 2
+##   Week     Visitors
+##   &lt;chr&gt;       &lt;dbl&gt;
+## 1 10/19/14        3
+## 2 10/26/14        2
+## 3 11/2/14         2
+## 4 11/9/14         2
+## 5 11/16/14        1
+## 6 11/23/14        2</code></pre>
+<p>These are standard steps across R workflows. Since we will be working with time
+series data for forecasting, we will need to change the dataframe stored in
+<code>my_data</code> to a <code>ts()</code> object. This is a special format that the <code>forecast</code> tools
+understand.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="loading-time-series-data-into-r.html#cb7-1"></a><span class="co"># convert dataframe to a weekly time series, starting 1/2014</span></span>
+<span id="cb7-2"><a href="loading-time-series-data-into-r.html#cb7-2"></a>my_ts &lt;-<span class="st"> </span><span class="kw">ts</span>(my_data<span class="op">$</span>Visitors, <span class="dt">start=</span><span class="dv">2014</span>, <span class="dt">freq=</span><span class="dv">52</span>)</span></code></pre></div>
+<p>This step varies slightly depending on the time variable; this data is
+weekly, but we can have monthly, quarterly, daily, annual, or even hourly data, which
+requires a different value for <code>freq</code>.</p>
+</div>
+<div id="visualizing-the-sample-data" class="section level3">
+<h3><span class="header-section-number">1.2.3</span> Visualizing the sample data</h3>
+<p>To recap so far, this is how the <code>my_forecasting_script.R</code> file should look at this point:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="loading-time-series-data-into-r.html#cb8-1"></a><span class="kw">library</span>(forecast)</span>
+<span id="cb8-2"><a href="loading-time-series-data-into-r.html#cb8-2"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb8-3"><a href="loading-time-series-data-into-r.html#cb8-3"></a><span class="kw">library</span>(zoo)</span>
+<span id="cb8-4"><a href="loading-time-series-data-into-r.html#cb8-4"></a><span class="kw">library</span>(lubridate)</span>
+<span id="cb8-5"><a href="loading-time-series-data-into-r.html#cb8-5"></a></span>
+<span id="cb8-6"><a href="loading-time-series-data-into-r.html#cb8-6"></a><span class="co"># load a csv from the data/ folder and store it as a dataframe</span></span>
+<span id="cb8-7"><a href="loading-time-series-data-into-r.html#cb8-7"></a><span class="co"># the path relative to the current working directory</span></span>
+<span id="cb8-8"><a href="loading-time-series-data-into-r.html#cb8-8"></a>my_data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;data/visitors.csv&#39;</span>)</span>
+<span id="cb8-9"><a href="loading-time-series-data-into-r.html#cb8-9"></a></span>
+<span id="cb8-10"><a href="loading-time-series-data-into-r.html#cb8-10"></a><span class="co"># view the first few lines of a dataframe</span></span>
+<span id="cb8-11"><a href="loading-time-series-data-into-r.html#cb8-11"></a><span class="kw">head</span>(my_data)</span>
+<span id="cb8-12"><a href="loading-time-series-data-into-r.html#cb8-12"></a></span>
+<span id="cb8-13"><a href="loading-time-series-data-into-r.html#cb8-13"></a><span class="co"># convert dataframe to a weekly time series, starting 1/2014</span></span>
+<span id="cb8-14"><a href="loading-time-series-data-into-r.html#cb8-14"></a>my_ts &lt;-<span class="st"> </span><span class="kw">ts</span>(my_data<span class="op">$</span>Visitors, <span class="dt">start=</span><span class="dv">2014</span>, <span class="dt">freq=</span><span class="dv">52</span>)</span></code></pre></div>
+<p>Now that the data is loaded and formatted, we can generate a quick visualization
+using <code>autoplot()</code> function from the <code>forecast</code> package after the last line in the script:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="loading-time-series-data-into-r.html#cb9-1"></a><span class="kw">autoplot</span>(my_ts) <span class="op">+</span></span>
+<span id="cb9-2"><a href="loading-time-series-data-into-r.html#cb9-2"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;My Time Series Plot&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>The first line defines the base plot, and we add a title to it by adding <code>+</code> after
+the <code>autoplot()</code> function, moving to the next line for readability, and using the
+<code>ggtitle()</code> function to add a title to it. This is <code>ggplot2</code> syntax. You can read
+more about <code>ggplot2</code> at depth in <a href="https://r4ds.had.co.nz/">R for Data Science</a>.</p>
+<p><strong>That’s it!</strong> You can start forecasting now. We will use this data to build a
+simple linear regression forecast in the next section, equivalent to the <code>FORECAST()</code>
+function in Excel.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="what-is-time-series-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="a-simple-forecast.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
