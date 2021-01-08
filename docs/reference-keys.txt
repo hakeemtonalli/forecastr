@@ -1,0 +1,12 @@
+tab:unnamed-chunk-2
+tab:unnamed-chunk-3
+tab:unnamed-chunk-4
+introduction
+what-is-time-series-data
+loading-time-series-data-into-r
+setting-up-the-project
+loading-the-sample-data
+visualizing-the-sample-data
+a-simple-forecast
+forecast-accuracy
+evaluating-the-forecast-in-r

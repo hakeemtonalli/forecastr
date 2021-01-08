@@ -1,0 +1,34 @@
+---
+  site: "bookdown::bookdown_site"
+output:
+  bookdown::gitbook: default
+documentclass: book
+#bibliography: ["book.bib", "packages.bib"]
+biblio-style: apalike
+link-citations: yes
+---
+  
+# Exponential Smoothing Methods
+
+One of the most popular forecasting tools is __Exponential Smoothing__; it's more flexible
+than linear regression, while being more simple and intuitive than ARIMA. 
+
+Exponential smoothing methods model the data by assuming that the time series is a combination of three components: __trend, error, and seasonality__. The error in this case is the random flunctuations from one period to the next, which can be represented in the model as a component. 
+
+
+$$Y_t = S_t + E_t + T_t$$
+
+
+where $Y_t$ is the value of our time series at time $t$, 
+
+
+However, it's not without it's downsides. First, exponential smoothing breaks down for weird seasonalities, such as a weekly seasonality, which has a _non-integer_ seasonality of 52.14. It also breaks down for series with __multiple seasonalities__. For example, if we have daily seasonality (more sales on Fridays) mixed with monthly seasonality (more sales in December), then exponential smoothing will need some modifications.
+
+
+## Simple Weighted Average
+
+## Single Exponential Smoothing
+
+## Double Exponential Smoothing
+
+## STL Decomposition
