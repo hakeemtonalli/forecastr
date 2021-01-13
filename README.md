@@ -1,26 +1,7 @@
----
-title: Forecasting in R
-author: Hakeem Frank
-date: ""
-site: "bookdown::bookdown_site"
-output:
-  bookdown::gitbook: 
-    split_by: section 
-    config:
-      toc:
-        before: |
-         <li><a href="...">Forecasting in R</a></li>
-documentclass: book
-#bibliography: ["book.bib", "packages.bib"]
-biblio-style: apalike
-link-citations: yes
----
+# forecastr <img src="media/forecastr_sticker.png" align="right" height="200" />
 
 
-# Preface {-} 
 
-<img src="media/forecastr_sticker.svg" height="300" align="right" />
- 
 An introductory guide for doing time series forecasting in R, inspired by [Rob Hyndman's text](https://otexts.com/fpp2/) on time series analysis and the Shumway & Stauffer [time series analysis textbook](https://www.stat.pitt.edu/stoffer/tsa4/tsa4.pdf). This guide is designed to walk through a few commonly-used forecasting models for business analytics. 
 
 ### Who it's for {-}
@@ -40,4 +21,6 @@ After the introductory section, the sections can be read in __any order__. It's 
 Hopefully the material here helps you understand the basics of forecasting, or at least
 can serve as a reference for simple code to get the job done.
 
-      
+### Website Link
+
+* [forecastr](https://hakeemtfrank.github.io/forecastr/index.html)
