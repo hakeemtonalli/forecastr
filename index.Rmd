@@ -9,7 +9,7 @@ output:
     config:
       toc:
         before: |
-         <li><a href="">Forecasting in R</a></li>
+         <li><a href="http://hakeemtfrank.github.io/forecastr">Forecasting in R</a></li>
 documentclass: book
 #bibliography: ["book.bib", "packages.bib"]
 biblio-style: apalike
