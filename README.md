@@ -1,19 +1,17 @@
-# forecastr <a href = "http://hakeemtfrank.github.io/forecastr"><img src="media/forecastr_sticker.png" align="right" height="250" /></a>
+# forecastr <a href = "http://hakeemtfrank.github.io/forecastr"><img src="media/forecastr_sticker.png" align="right" height="160" /></a>
 
 
 
-An introductory guide for doing time series forecasting in R, inspired by [Rob Hyndman's text](https://otexts.com/fpp2/) on time series analysis and the Shumway & Stauffer [time series analysis textbook](https://www.stat.pitt.edu/stoffer/tsa4/tsa4.pdf). This guide is designed to walk through a few commonly-used forecasting models for business analytics. 
+An [introductory guide](http://hakeemtfrank.github.io/forecastr) for doing time series forecasting in R, inspired by [Rob Hyndman's text](https://otexts.com/fpp2/) on time series analysis and the Shumway & Stauffer [time series analysis textbook](https://www.stat.pitt.edu/stoffer/tsa4/tsa4.pdf). This guide is designed to walk through a few commonly-used forecasting models for business analytics. 
 
-### Who it's for 
+## Who it's for 
 
-It's written for analysts that would like to strengthen their knowledge in building forecasting models and move beyond off-the-shelf forecast tools, such as [Tableau's exponential smoothing forecast tool](https://help.tableau.com/current/pro/desktop/en-us/forecasting.htm). While knowing the basics 
-of R is helpful, it's not required. Statistical jargon is kept to a minimum.
+It's written for analysts that would like to __strengthen their knowledge in building forecasting models__ and move beyond off-the-shelf forecast tools, such as [Tableau's exponential smoothing forecast tool](https://help.tableau.com/current/pro/desktop/en-us/forecasting.htm). While knowing the basics of R is helpful, it's not required. Statistical jargon is kept to a minimum.
 
 
-### How it's organized 
+## How it's organized 
 
-The guide begins by introducing time series data with a hands-on example. This is followed
-by a forecasting method familiar to most: __linear regression__. By the end of the first section, the reader will have made a very simple forecast in R! 
+The guide begins by introducing time series data with a hands-on example. This is followed by a forecasting method familiar to most: __linear regression__. By the end of the first section, the reader will have made a very simple forecast in R! 
 
 
 After the introductory section, the sections can be read in __any order__. It's roughly ordered based on the ease of use and required statistical knowledge, with an extra section on doing general time series analysis. 
