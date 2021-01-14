@@ -1,4 +1,4 @@
-# generate the plot for the book
+# generate the plot for the guide
 
 # install.packages("hexSticker")
 #install.packages("svglite)
@@ -31,7 +31,7 @@ p <- ggplot() +
   ylab("Pickups") + 
   ylim(-50, 110)
 
-# make hex sticker
+# make hex sticker with text (png)
 p %>% sticker(
   package="",
   h_color="gray",
@@ -50,7 +50,7 @@ p %>% sticker(
   filename="../media/forecastr_sticker.png"
   )
 
-# make hex sticker
+# make hex sticker with text (svg)
 p %>% sticker(
   package="",
   h_color="gray",
@@ -69,7 +69,7 @@ p %>% sticker(
   filename="../media/forecastr_sticker.svg"
 )
 
-# make hex sticker
+# hex sticker without text (png)
 p %>% sticker(
   package="",
   h_color="gray",
@@ -88,7 +88,7 @@ p %>% sticker(
   filename="../media/forecastr_background.png"
 )
 
-# make hex sticker
+# hex sticker without text (svg)
 p %>% sticker(
   package="",
   h_color="gray",

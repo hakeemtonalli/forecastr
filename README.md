@@ -16,8 +16,7 @@ The guide begins by introducing time series data with a hands-on example. This i
 
 After the introductory section, the sections can be read in __any order__. It's roughly ordered based on the ease of use and required statistical knowledge, with an extra section on doing general time series analysis. 
 
-Hopefully the material here helps you understand the basics of forecasting, or at least
-can serve as a reference for simple code to get the job done.
+Hopefully the material here helps you understand the basics of forecasting, or can at least serve as a reference for simple code to get the job done.
 
 ### Website Link
 

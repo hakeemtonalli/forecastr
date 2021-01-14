@@ -19,7 +19,7 @@ link-citations: yes
 
 # Preface {-} 
 
-<img src="media/forecastr_sticker.svg" height="300" align="right" />
+<img src="media/forecastr_sticker.svg" height="160" align="right" />
  
 An [introductory guide](https://hakeemtfrank.github.io/forecastr/) for doing time series forecasting in R, inspired by [Rob Hyndman's text](https://otexts.com/fpp2/) on time series analysis and the Shumway & Stauffer [time series analysis textbook](https://www.stat.pitt.edu/stoffer/tsa4/tsa4.pdf). This guide is designed to walk through a few commonly-used forecasting models for business analytics. 
 
@@ -37,7 +37,6 @@ by a forecasting method familiar to most: __linear regression__. By the end of t
 
 After the introductory section, the sections can be read in __any order__. It's roughly ordered based on the ease of use and required statistical knowledge, with an extra section on doing general time series analysis. 
 
-Hopefully the material here helps you understand the basics of forecasting, or at least
-can serve as a reference for simple code to get the job done.
+Hopefully the material here helps you understand the basics of forecasting, or can at least serve as a reference for simple code to get the job done.
 
       

@@ -3,7 +3,7 @@ _book/
 _bookdown_files/
 libs/
 **/*.bib
-.DS_Store/
+.DS_Store
 */mathjax_header.html
 .Rproj.user
 .Rhistory
