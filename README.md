@@ -1,6 +1,5 @@
-# forecastr <a href = "http://hakeemtfrank.github.io/forecastr"><img src="media/forecastr_sticker.png" align="right" height="160" /></a>
-
-
+# forecastr 
+[![](https://img.shields.io/badge/Online%20Guide%20-forecastr-blue.svg)](https://hakeemtfrank.github.io/forecastr)
 
 An [introductory guide](http://hakeemtfrank.github.io/forecastr) for doing time series forecasting in R, inspired by [Rob Hyndman's text](https://otexts.com/fpp2/) on time series analysis and the Shumway & Stauffer [time series analysis textbook](https://www.stat.pitt.edu/stoffer/tsa4/tsa4.pdf). This guide is designed to walk through a few commonly-used forecasting models for business analytics. 
 
